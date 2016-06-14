@@ -1,0 +1,17 @@
+  python parse_dep_srilm.py /home/yhlin/corenlp/outputXML/written <br/>
+  cat train_corpus > train_corpus_all
+  python parse_dep_srilm.py /home/yhlin/corenlp/outputXML/annotator1
+  cat train_corpus >> train_corpus_all
+  python parse_dep_srilm.py /home/yhlin/corenlp/outputXML/annotator2
+  cat train_corpus >> train_corpus_all
+  python parse_dep_srilm.py /home/yhlin/corenlp/outputXML/annotator3
+  cat train_corpus >> train_corpus_all
+  vim train_corpus_all
+  python cr_dict.py > dictionary.txt
+  python cr_dict.py -f > dictionary_f
+  ./ngram-count.exe -vocab dictionary.txt -text train_corpus_all -order 3 -write train_corpus_count.txt -unk
+  ./ngram-count.exe -vocab dictionary.txt -read train_corpus_count.txt -order 3 -lm lm.dat -gt1min 1 -gt1max 2 -gt2min 1 -gt2max 2
+
+  # 1. parse_dep_srilm.py processes dependency tree, combine trees, print patterns of a phrase and its following dep.
+  # 2. cr_dict.py outputs word, frequency pair
+  
